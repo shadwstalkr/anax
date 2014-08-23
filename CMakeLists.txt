@@ -55,10 +55,10 @@ set(ANAX_VIRTUAL_DTORS_IN_COMPONENT true CACHE BOOL "Enables virtual dtors in co
 set(ANAX_DEFAULT_ENTITY_POOL_SIZE 1000 CACHE INTEGER "The default entity pool size, within a World object")
 
 # set up the configure file for the library
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp.inl ${CMAKE_CURRENT_SOURCE_DIR}/include/anax/config.hpp)
+configure_file(include/anax/config.hpp.inl include/anax/config.hpp)
 
 # Add include directories
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_BINARY_DIR}/include)
 
 # Determine if we're building a shared (dynamic) library
 # And set appropriate suffixes for the executables
@@ -101,6 +101,13 @@ endif()
 
 # Add the library
 add_library(${ANAX_LIBRARY_NAME} ${ANAX_LIBRARY_SOURCES})
+
+target_include_directories(
+  ${ANAX_LIBRARY_NAME}
+  INTERFACE
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
+  ${CMAKE_CURRENT_BINARY_DIR}/include
+)
 
 # Build tests if we need to
 if(BUILD_TESTS)
