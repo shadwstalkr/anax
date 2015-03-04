@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 project (ANAX)
 
-set(CMAKE_MODULE_PATH "/usr/local/lib/SFML-2.1/share/SFML/cmake/Modules")
+# set(CMAKE_MODULE_PATH "/usr/local/lib/SFML-2.1/share/SFML/cmake/Modules")
 
 set(ANAX_LIBRARY_NAME "anax")
 set(ANAX_VERSION_MAJOR 1)
@@ -107,6 +107,7 @@ target_include_directories(
   INTERFACE
   ${CMAKE_CURRENT_SOURCE_DIR}/include
   ${CMAKE_CURRENT_BINARY_DIR}/include
+  ${Boost_INCLUDE_DIRS}
 )
 
 # Build tests if we need to
